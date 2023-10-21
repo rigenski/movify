@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -10,6 +11,8 @@ import {
   View,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import MovieItem from "../../components/movies/MovieItem/MovieItem";
+import { getMovies } from "../../services/movies";
 import { mediaTypes } from "../../utilities/const";
 import styles from "./styles";
 
@@ -38,7 +41,7 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-export default function Movies() {
+export default function Movies(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -50,16 +53,18 @@ export default function Movies() {
   const handleGetMovies = () => {
     if (formValues?.mediaType && formValues?.searchTerm) {
       setIsLoading(true);
-      const apiUrl = `https://itunes.apple.com/search?term=${formValues?.searchTerm}&media=${formValues?.mediaType}&limit=10`;
 
-      fetch(apiUrl)
-        .then((response) => response.json())
+      const params = {
+        term: formValues?.searchTerm,
+        media: formValues?.mediaType,
+      };
+
+      getMovies(params)
         .then((data) => {
-          console.log(data);
-          setMovies(data.results);
+          setMovies(data?.results);
         })
         .catch((error) => {
-          console.error("Error fetching data:", error);
+          console.log("Error fetching data:", error);
         });
 
       setIsLoading(false);
@@ -77,20 +82,18 @@ export default function Movies() {
       </View>
       <View style={styles.form}>
         <View style={styles.formWrapper}>
-          {formValues?.mediaType ? (
-            <RNPickerSelect
-              placeholder={{
-                label: "Select Media",
-                value: null,
-              }}
-              items={mediaTypes}
-              onValueChange={(val) =>
-                setFormValues((curr) => ({ ...curr, mediaType: val }))
-              }
-              value={formValues?.mediaType}
-              style={pickerSelectStyles}
-            />
-          ) : null}
+          <RNPickerSelect
+            placeholder={{
+              label: "Select Media",
+              value: null,
+            }}
+            items={mediaTypes}
+            onValueChange={(val) =>
+              setFormValues((curr) => ({ ...curr, mediaType: val }))
+            }
+            value={formValues?.mediaType}
+            style={pickerSelectStyles}
+          />
           <Image
             source={require("./../../assets/images/select-icon.png")}
             style={styles.formIcon}
@@ -130,21 +133,10 @@ export default function Movies() {
             horizontal={false}
             style={styles.listMovies}
             renderItem={({ item }) => (
-              <View style={styles.listItem}>
-                <Image
-                  source={{ uri: item?.artworkUrl30 }}
-                  style={styles.listImage}
-                />
-                <View>
-                  <Text style={styles.listName}>{item?.trackName}</Text>
-                  <Text style={styles.listCountry}>
-                    Country: {item?.country}
-                  </Text>
-                  <Text style={styles.listDate}>
-                    Release: {new Date(item?.releaseDate).getFullYear()}
-                  </Text>
-                </View>
-              </View>
+              <MovieItem
+                item={item}
+                setDetail={(val) => props?.setDetail(val)}
+              />
             )}
           />
         )}
