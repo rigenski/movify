@@ -1,8 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import Movies from "./screens/Movies/Movies";
 import { useState } from "react";
-import MovieDetail from "./screens/MovieDetail/MovieDetail";
+import { StyleSheet, View } from "react-native";
+import UserDetail from "./screens/UserDetail/UserDetail";
 import Users from "./screens/Users/Users";
 
 export default function App() {
@@ -13,12 +12,12 @@ export default function App() {
       {/* {!detail ? (
         <Movies setDetail={(val) => setDetail(val)} />
       ) : (
-        <MovieDetail detail={detail} />
+        <MovieDetail detail={detail} onClose={() => setDetail(null)} />
       )} */}
       {!detail ? (
         <Users setDetail={(val) => setDetail(val)} />
       ) : (
-        <MovieDetail detail={detail} />
+        <UserDetail detail={detail} onClose={() => setDetail(null)} />
       )}
       <StatusBar style="auto" />
     </View>

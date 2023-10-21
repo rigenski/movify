@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { FlatList, Image, Text, View } from "react-native";
-import MovieItem from "../../components/users/MovieItem/MovieItem";
+import UserItem from "../../components/users/UserItem/UserItem";
 import { getUsers } from "../../services/users";
 import styles from "./styles";
 
@@ -10,12 +10,12 @@ export default function Users(props) {
 
   const [users, setUsers] = useState([]);
 
-  const handleGetUsers = () => {
+  const handleGetUsers = async () => {
     setIsLoading(true);
 
     const params = {};
 
-    getUsers(params)
+    await getUsers(params)
       .then((data) => {
         setUsers(data?.results);
       })
@@ -41,7 +41,7 @@ export default function Users(props) {
           <View style={styles.listLoading}>
             <Image
               source={require("./../../assets/images/loading-icon.png")}
-              style={styles.formIcon}
+              style={styles.iconLoading}
             />
           </View>
         ) : (
@@ -51,7 +51,7 @@ export default function Users(props) {
             horizontal={false}
             style={styles.listUsers}
             renderItem={({ item }) => (
-              <MovieItem
+              <UserItem
                 item={item}
                 setDetail={(val) => props?.setDetail(val)}
               />

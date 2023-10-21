@@ -44,6 +44,16 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#f9fafb",
   },
+  listLoading: {
+    padding: 24,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  iconLoading: {
+    height: 24,
+    width: 24,
+  },
   listMovies: {
     marginBottom: 500,
   },

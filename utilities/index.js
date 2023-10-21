@@ -1,1 +1,2 @@
 import "./const";
+import "./func";

@@ -123,7 +123,7 @@ export default function Movies(props) {
           <View style={styles.listLoading}>
             <Image
               source={require("./../../assets/images/loading-icon.png")}
-              style={styles.formIcon}
+              style={styles.iconLoading}
             />
           </View>
         ) : (
