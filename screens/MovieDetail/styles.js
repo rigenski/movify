@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#1f2937",
   },
   header: {
-    marginBottom: 24,
+    marginBottom: 8,
   },
   headerClose: {
     width: 32,
     height: 32,
   },
   contentWrapper: {
+    marginTop: 8,
     flexDirection: "column",
     alignItems: "center",
   },

@@ -12,15 +12,15 @@ export default function UserDetail(props) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => props?.navigation.navigate("Users")}>
+          <Image
+            source={require("./../../assets/images/close-icon.png")}
+            style={styles.headerClose}
+          />
+        </TouchableOpacity>
+      </View>
       <ScrollView>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => props?.navigation.navigate("Users")}>
-            <Image
-              source={require("./../../assets/images/close-icon.png")}
-              style={styles.headerClose}
-            />
-          </TouchableOpacity>
-        </View>
         <View style={styles.content}>
           <View style={styles.contentWrapper}>
             <Image

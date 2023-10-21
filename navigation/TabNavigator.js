@@ -49,6 +49,7 @@ const TabNavigator = () => (
       component={MoviesStackScreen}
       options={{
         headerShown: false,
+        tabBarActiveTintColor: "#4338ca",
         tabBarIcon: ({ color, size }) => (
           <Image
             source={require("./../assets/images/movies-icon.png")}
@@ -62,6 +63,7 @@ const TabNavigator = () => (
       component={UserStackScreen}
       options={{
         headerShown: false,
+        tabBarActiveTintColor: "#4338ca",
         tabBarIcon: ({ color, size }) => (
           <Image
             source={require("./../assets/images/users-icon.png")}
