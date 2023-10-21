@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    paddingTop: 64,
+    flex: 1,
+    backgroundColor: "#1f2937",
+  },
   header: {
     marginBottom: 24,
   },
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
     width: 24,
   },
   listMovies: {
-    marginBottom: 500,
+    marginBottom: 220,
   },
 });
 

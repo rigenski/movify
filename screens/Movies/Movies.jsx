@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -76,7 +75,7 @@ export default function Movies(props) {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Movify</Text>
       </View>
@@ -135,7 +134,9 @@ export default function Movies(props) {
             renderItem={({ item }) => (
               <MovieItem
                 item={item}
-                setDetail={(val) => props?.setDetail(val)}
+                setDetail={(val) => {
+                  props?.navigation.navigate("MovieDetail", { detail: val });
+                }}
               />
             )}
           />

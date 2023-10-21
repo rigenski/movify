@@ -3,7 +3,6 @@ const getUsers = async (params) => {
     const response = await fetch(`https://randomuser.me/api/?results=20`).then(
       (response) => response.json()
     );
-    console.log(response);
 
     return response;
   } catch (error) {

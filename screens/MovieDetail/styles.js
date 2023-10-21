@@ -1,12 +1,18 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    paddingTop: 64,
+    flex: 1,
+    backgroundColor: "#1f2937",
+  },
   header: {
     marginBottom: 24,
   },
   headerClose: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   contentWrapper: {
     flexDirection: "column",

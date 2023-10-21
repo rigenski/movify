@@ -4,48 +4,47 @@ import MapView, { Marker } from "react-native-maps";
 import styles from "./styles";
 
 export default function UserDetail(props) {
+  const detail = props?.route?.params?.detail;
   const coordinate = {
-    latitude: props?.detail?.location?.coordinates?.latitude,
-    longitude: props?.detail?.location?.coordinates?.longitude,
+    latitude: detail?.location?.coordinates?.latitude,
+    longitude: detail?.location?.coordinates?.longitude,
   };
 
   return (
-    <ScrollView>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => props?.onClose()}>
-          <Image
-            source={require("./../../assets/images/close-icon.png")}
-            style={styles.headerClose}
-          />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.content}>
-        <View style={styles.contentWrapper}>
-          <Image
-            source={{ uri: props?.detail?.picture?.large }}
-            style={styles.contentImage}
-          />
-          <Text style={styles.contentTitle}>
-            {props?.detail?.name?.title} {props?.detail?.name?.first}{" "}
-            {props?.detail?.name?.last}
-          </Text>
-          <Text style={styles.contentEmail}>{props?.detail?.email}</Text>
-          <View style={styles.contentOptional}>
-            <Text style={styles.contentPhone}>
-              Phone: {props?.detail?.phone}
-            </Text>
-            <Text style={styles.contentAddress}>
-              Address: {props?.detail?.location?.name}{" "}
-              {props?.detail?.location?.number} {props?.detail?.location?.city}{" "}
-              {props?.detail?.location?.state} {props?.detail?.location?.county}{" "}
-              {props?.detail?.location?.postcode}
-            </Text>
-          </View>
-          <MapView region={coordinate} style={styles.contentMaps}>
-            <Marker coordinate={coordinate} title="Location" />
-          </MapView>
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => props?.navigation.navigate("Users")}>
+            <Image
+              source={require("./../../assets/images/close-icon.png")}
+              style={styles.headerClose}
+            />
+          </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
+        <View style={styles.content}>
+          <View style={styles.contentWrapper}>
+            <Image
+              source={{ uri: detail?.picture?.large }}
+              style={styles.contentImage}
+            />
+            <Text style={styles.contentTitle}>
+              {detail?.name?.title} {detail?.name?.first} {detail?.name?.last}
+            </Text>
+            <Text style={styles.contentEmail}>{detail?.email}</Text>
+            <View style={styles.contentOptional}>
+              <Text style={styles.contentPhone}>Phone: {detail?.phone}</Text>
+              <Text style={styles.contentAddress}>
+                Address: {detail?.location?.name} {detail?.location?.number}{" "}
+                {detail?.location?.city} {detail?.location?.state}{" "}
+                {detail?.location?.county} {detail?.location?.postcode}
+              </Text>
+            </View>
+            <MapView region={coordinate} style={styles.contentMaps}>
+              <Marker coordinate={coordinate} title="Location" />
+            </MapView>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }

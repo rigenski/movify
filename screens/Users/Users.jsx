@@ -31,7 +31,7 @@ export default function Users(props) {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>List User</Text>
       </View>
@@ -53,7 +53,9 @@ export default function Users(props) {
             renderItem={({ item }) => (
               <UserItem
                 item={item}
-                setDetail={(val) => props?.setDetail(val)}
+                setDetail={(val) =>
+                  props?.navigation.navigate("UserDetail", { detail: item })
+                }
               />
             )}
           />
